@@ -1,0 +1,139 @@
+﻿
+@model KirilsShop.Models.ViewModels.CarVM
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="text-center my-5 py-5">@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model)</h3>
+
+
+<section class="bg-custom-gray my-5">
+    <div style="max-width:1000px " class="mx-auto ">
+        <div id="carouselExampleAutoplaying" class="carousel slide container" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                @for (int i = 0; i < Model.Gallery.Count(); i++)
+                {
+                    <div class="@(i==0 ? "carousel-item active" : "carousel-item") ">
+                        <img class="d-block w-100 img-fluid" src="@Model.Gallery[i].URL" alt="...">
+                    </div>
+                }
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+       
+
+        <div class="container my-5 py-5">
+            <table class=" table table-striped table-hover">
+                <thead>
+                   
+                </thead>
+                <tbody>
+                    
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Brand)</td>
+                    <td>@Html.DisplayFor(model => model.Brand)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Model)</td>
+                    <td>@Html.DisplayFor(model => model.Model)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.YOP)</td>
+                    <td>@Html.DisplayFor(model => model.YOP)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Color)</td>
+                    <td>@Html.DisplayFor(model => model.Color)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Perfomance)</td>
+                    <td>@Html.DisplayFor(model => model.Perfomance)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Mileage)</td>
+                    <td>@Html.DisplayFor(model => model.Mileage)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Fuel)</td>
+                    <td>@Html.DisplayFor(model => model.Fuel)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Body)</td>
+                    <td>@Html.DisplayFor(model => model.Body)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.VIN)</td>
+                    <td>@Html.DisplayFor(model => model.VIN)</td>
+
+                </tr>
+                <tr>
+                    <th scope="row"></th>
+                    <td> @Html.DisplayNameFor(model => model.Origin)</td>
+                    <td>@Html.DisplayFor(model => model.Origin)</td>
+
+                </tr>
+               
+
+                </tbody>
+            </table>
+        </div>
+
+       
+    <section class="bg-custom-gray my-5 ">
+        <div class="container">
+
+            <div class="col-md-9 m-5">
+                <div class="h-100 p-5 bg-body-tertiary rounded-3">
+                    <h2 class="mb-3">@Html.DisplayNameFor(model => model.Description)</h2>
+                    <p> @Html.DisplayFor(model => model.Description).</p>
+
+                </div>
+            </div>
+
+        </div>
+            
+        
+        <div class="container pb-5">
+            
+            <a asp-controller="Cars" asp-action="Index">Back to list</a>
+        </div>
+
+      
+
+    </section>
+  
+

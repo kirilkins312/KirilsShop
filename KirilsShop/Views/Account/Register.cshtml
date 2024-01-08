@@ -1,0 +1,78 @@
+﻿﻿@using KirilsShop.Models.ViewModels;
+@model SignInVM;
+
+
+@{
+    ViewData["Title"] = "Sign up for a new account";
+}
+
+
+<section class="">
+    <div class="container">
+        <div class="col-md-5 mx-auto text-center">
+            <div class="h-100 p-5 my-5 bg-body-white ">
+                <h2> Sign up for more features</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@if (TempData["Error"] != null)
+{
+    <div class="col-md-3 alert alert-danger mx-auto">
+        <span><b>Sorry!</b> - @TempData["Error"] </span>
+    </div>
+}
+
+
+<section class="bg-custom-gray  my-5">
+    <div class="container">
+        <div class="col-md-9 mx-auto">
+            <form asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="h-100 p-5 bg-body-white ">
+                    <div class="form-floating mb-3">
+                        <input asp-for="FullName" type="name" class="form-control" id="floatingInput" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <label for="floatingInput">Full name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="EmailAddress" type="email" class="form-control" id="floatingInput" class="form-control" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        <label for="floatingInput">Email Address</label>
+
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" type="password" class="form-control" id="floatingInput" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <label for="floatingInput">Password</label>
+
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="ConfirmPassword" class="form-control" id="floatingInput" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        <label for="floatingInput">Confirm password</label>
+
+
+                    </div>
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-secondary">Sign up</button>
+                        <a class="btn btn-outline-secondary" asp-controller="Cars" asp-action="Index">Cancel</a>
+                    </div>
+                   
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+   
+</section>
+
+
+    

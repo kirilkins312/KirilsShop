@@ -1,0 +1,95 @@
+﻿@model KirilsShop.Models.Car
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Car</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label"></label>
+                <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brand"></select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelId" class="control-label"></label>
+                <select asp-for="ModelId" class="form-control" asp-items="ViewBag.Model"></select>
+                <span asp-validation-for="ModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YOPId" class="control-label"></label>
+                <select asp-for="YOPId" class="form-control" asp-items="ViewBag.YearOfProduction"></select>
+                <span asp-validation-for="YOPId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorId" class="control-label"></label>
+                <select asp-for="ColorId" class="form-control" asp-items="ViewBag.Color"></select>
+                <span asp-validation-for="ColorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Performance" class="control-label"></label>
+                <input asp-for="Performance" class="form-control" />
+                <span asp-validation-for="Performance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage" class="control-label"></label>
+                <input asp-for="Mileage" class="form-control" />
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelId" class="control-label"></label>
+                <select asp-for="FuelId" class="form-control" asp-items="ViewBag.Fuel"></select>
+                <span asp-validation-for="FuelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyId" class="control-label"></label>
+                <select asp-for="BodyId" class="form-control" asp-items="ViewBag.Body"></select>
+                <span asp-validation-for="BodyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VIN" class="control-label"></label>
+                <input asp-for="VIN" class="form-control" />
+                <span asp-validation-for="VIN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OriginId" class="control-label"></label>
+                <select asp-for="OriginId" class="form-control" asp-items="ViewBag.Origin"></select>
+                <span asp-validation-for="OriginId" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="CoverImageUrl" class="control-label"></label>
+                <input asp-for="CoverImageUrl" class="form-control" />
+                <span asp-validation-for="CoverImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
