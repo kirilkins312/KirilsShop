@@ -8,5 +8,5 @@
               2)Type "Add-Migration" First_Migration
               3)Then "Update-Database"
               4)You are all set
-6)Now u can Create, Edit, Delete objects (They should be already created by DB seed, if not, something went wrong. In this case contact me) 
+6)Now u can Create, Edit, Delete objects (cars) (Categories should be already created by DB seed, if not, something went wrong. In this case contact me) 
           
