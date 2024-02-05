@@ -1,5 +1,4 @@
-﻿@model IEnumerable<KirilsShop.Models.Car>
-
+﻿@model KirilsShop.Models.ViewModels.FilterVM
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,21 +26,137 @@
      
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      min-height: 100vh;    
     ">
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-controller="Cars" asp-action="CreateView"> Create</a>
+    }
 
-<div class="">
-
+    <div class="d-flex justify-content-around" style="align-items: flex-start;">
         
+        <section class="d-flex flex-column m-5 bg-custom-gray p-5" style="max-width:400px ">
+            <form asp-controller="Cars" asp-action="Index" method="post">
 
-            <section class="container d-flex mx-5">
-                @if (User.IsInRole("Admin"))
+                <h5>Filter by</h5>
+
+                <div class="d-flex flex-column">
+                    <button class="btn btn-light m-3" type="button" onclick="toggleCheckboxes('brandsContainer')">Brands</button>
+                    <div class="checkbox  my-5" id="brandsContainer" style="display:none;">
+                        @foreach (var option in Model.BrandList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedBrands" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked " >
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+
+                    <button class="btn btn-light  m-3" type="button" onclick="toggleCheckboxes('modelsContainer')">Models</button>
+                    <div class="checkbox  my-5" id="modelsContainer" style="display:none;">
+                        @foreach (var option in Model.ModelList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedModels" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+
+                    <button class="btn btn-light  m-3   " type="button" onclick="toggleCheckboxes('bodiesContainer')">Bodies</button>
+                    <div class="checkbox  my-5" id="bodiesContainer" style="display:none;">
+                        @foreach (var option in Model.BodyList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedBodies" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+
+                    <button class="btn btn-light  m-3   " type="button" onclick="toggleCheckboxes('colorsContainer')">Colour</button>
+                    <div class="checkbox  my-5" id="colorsContainer" style="display:none;">
+                        @foreach (var option in Model.ColorList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedColors" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                    <button class="btn btn-light  m-3   " type="button" onclick="toggleCheckboxes('fuelContainer')">Fuel</button>
+                    <div class="checkbox  my-5" id="fuelContainer" style="display:none;">
+                        @foreach (var option in Model.FuelList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedFuels" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                    <button class="btn btn-light  m-3   " type="button" onclick="toggleCheckboxes('originContainer')">Origin</button>
+                    <div class="checkbox  my-5" id="originContainer" style="display:none;">
+                        @foreach (var option in Model.OriginList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedOrigins" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                    <button class="btn btn-light  m-3   " type="button" onclick="toggleCheckboxes('yopsContainer')">Year of production</button>
+                    <div class="checkbox  my-5" id="yopsContainer" style="display:none;">
+                        @foreach (var option in Model.YOPList)
+                        {
+                            <div class="list-items">
+                                <input asp-for="@option.IsChecked" type="checkbox" value="@option.Id" name="SelectedYOPs" id="@option.Id" checked="@option.IsChecked" />
+                                <label class="cat-item" asp-for="@option.IsChecked">
+                                    @option.Name
+                                </label>
+                            </div>
+                        }
+
+                    </div>
+                    <input type="submit" value="Search">
+
+                    <script>
+                        function toggleCheckboxes(containerId) {
+                            var checkboxContainer = document.getElementById(containerId);
+                            checkboxContainer.style.display = (checkboxContainer.style.display === 'none') ? 'block' : 'none';
+                        }
+                    </script>
+                </div>
+                
+            </form>
+
+        </section>
+
+
+
+        <section class="container d-flex mx-5" style="   max-height: 50rem;">
+            
+               
+                @foreach (var item in Model.Cars)
                 {
-                <a asp-controller="Cars" asp-action="CreateView"> Create</a>
-                }
-                @foreach (var item in Model)
-                {
-                    <div class="card shadow mx-3" style="width: 18rem;">
+                <div class="card shadow mx-3" style="width: 18rem; max-height: 50rem;">
                         
                         <a class="" asp-controller="Cars" asp-action="Details" asp-route-id="@item.id">
                             <div class="bg-custom-gray h-10">

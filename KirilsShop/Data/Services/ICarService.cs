@@ -18,6 +18,7 @@ namespace KirilsShop.Data.Services
         Task UpdateAsync(DropdownVM data, int id);
         Task<Car> GetByIdAsync(int id);
         Task DeleteAsync(int id);
+        List<Car> GetFilteredCarList(FilterVM model);
         Task<List<T>> GetAllObjectsAsync<T>() where T : class;
         Task<List<T>> GetCategoryObjectsAsync<T>(Expression<Func<T, bool>> predicate) where T : class;
        

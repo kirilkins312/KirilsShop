@@ -21,13 +21,15 @@ namespace KirilsShop.Controllers
     [Authorize(Roles = UserRoles.Admin)]
     public class CarsController : Controller
     {
+        private readonly AppDbContext _context;
         private readonly ICarService _service;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CarsController(ICarService service, IWebHostEnvironment webHostEnvironment)
+        public CarsController(ICarService service, IWebHostEnvironment webHostEnvironment, AppDbContext context)
         {
             _service = service;
             _webHostEnvironment = webHostEnvironment;   
+            _context = context;
          
         }
 
@@ -36,9 +38,81 @@ namespace KirilsShop.Controllers
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-            var appDbContext = await _service.GetAllAsync();
-            return View(appDbContext);
+
+            var cars = await _service.GetAllAsync();
+           
+
+            var brands = await _context.CarBrands.ToListAsync();
+            var models = await _context.CarModels.ToListAsync();
+            var bodies = await _context.CarBodys.ToListAsync();
+            var colors = await _context.CarColors.ToListAsync();
+            var fuel = await _context.CarFuels.ToListAsync();
+            var origins = await _context.CarOrigins.ToListAsync();
+            var YOPs = await _context.CarYOPs.ToListAsync();
+
+            var filterVM = new FilterVM()
+            {
+                BrandList= brands,
+                ModelList= models,
+                BodyList=bodies,
+                ColorList= colors,
+                FuelList= fuel,
+                OriginList= origins,
+                YOPList= YOPs,
+                Cars = cars,
+                
+            };
+
+            if (cars == null || brands == null || models == null|| bodies == null || colors == null||fuel == null || origins== null||YOPs== null )
+            {
+                return NotFound();
+            }
+
+            
+            return View(filterVM);
+
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Index(FilterVM filterVM)
+        {
+
+            var cars = await _service.GetAllAsync();
+
+
+            var brands = await _service.GetAllObjectsAsync<Brand>();
+            var models = await _service.GetAllObjectsAsync<Model>();
+            var bodies = await _service.GetAllObjectsAsync<Body>();
+            var colors = await _service.GetAllObjectsAsync<Colour>();
+            var fuel = await _service.GetAllObjectsAsync<Fuel>();
+            var origins = await _service.GetAllObjectsAsync<Origin>();
+            var YOPs = await _service.GetAllObjectsAsync<YearOfProduction>();
+
+            if (cars == null || brands == null || models == null || bodies == null || colors == null || fuel == null || origins == null || YOPs == null)
+            {
+                return NotFound();
+            }
+
+
+            var filteredListCars = _service.GetFilteredCarList(filterVM);
+            
+
+
+            filterVM.BrandList = brands;
+            filterVM.ModelList = models;
+            filterVM.BodyList= bodies;
+            filterVM.ColorList = colors;
+            filterVM.FuelList= fuel;
+            filterVM.OriginList = origins;
+            filterVM.YOPList= YOPs; 
+            filterVM.Cars= filteredListCars;
+
+            return View(filterVM);
+
+
+        }
+
+
 
         public async Task<IActionResult> CreateView()
         {
@@ -157,7 +231,7 @@ namespace KirilsShop.Controllers
             await _service.AddAsync(data);
             
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Cars/Edit/5

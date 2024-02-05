@@ -8,6 +8,6 @@ namespace KirilsShop.Data.Services
     {
         Task StoreOrder(List<ShoppingCartItem> items, string userId, string Emailadress);
         Task<List<Order>> GetOrdersByUserIdAsync(string userId, string userRole);
-        
+        Task<List<Order>> GetOrdersAsync();
     }
 }

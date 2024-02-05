@@ -80,9 +80,18 @@ namespace KirilsShop.Controllers
 
         public async Task<IActionResult> OrdersList()
         {
+
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string userRole = User.FindFirstValue(ClaimTypes.Role);
             var orders = await _orderSerivce.GetOrdersByUserIdAsync(userId, userRole);
+            
+            if (User.IsInRole("Admin"))
+            {
+                orders = await _orderSerivce.GetOrdersAsync();
+                return View(orders);
+            }
+                
+           
             return View(orders);
 
 

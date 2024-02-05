@@ -23,7 +23,195 @@ namespace KirilsShop.Data.Services
             _webHostEnvironment = webHostEnvironment;
         }
 
+        List<Car> ICarService.GetFilteredCarList(FilterVM model)
+        {
+            var brands = _context.CarBrands.ToList();
+            var models = _context.CarModels.ToList();
+            var bodies = _context.CarBodys.ToList();
+            var colors = _context.CarColors.ToList();
+            var fuels = _context.CarFuels.ToList();
+            var origins = _context.CarOrigins.ToList();
+            var yearsOfProduction = _context.CarYOPs.ToList();
+            var cars = _context.Car.Include(c => c.Body)
+                .Include(c => c.Brand)
+                .Include(c => c.Color)
+                .Include(c => c.Fuel)
+                .Include(c => c.Model)
+                .Include(c => c.Origin)
+                .Include(c => c.YearOfProduction)
+                .Include(c => c.CarGallery).ToList() ;
+            
 
+
+
+
+
+
+
+
+
+            List<Car> cars1 = new List<Car>();
+
+            if (model.SelectedBrands != null)
+            {
+                foreach (var categoryId in model.SelectedBrands)
+                {
+                    var selectedCategory = _context.CarBrands.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.BrandId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+               
+            }
+
+            if (model.SelectedModels != null)
+            {
+                foreach (var categoryId in model.SelectedModels)
+                {
+                    var selectedCategory = _context.CarModels.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.ModelId == categoryId).ToList();
+                        
+                        //Cheking selected categories ids and filtering list
+                       foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+                
+            }
+
+            if (model.SelectedBodies != null)
+            {
+                foreach (var categoryId in model.SelectedBodies)
+                {
+                    var selectedCategory = _context.CarBodys.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.BodyId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+
+            }
+            if (model.SelectedColors != null)
+            {
+                foreach (var categoryId in model.SelectedColors)
+                {
+                    var selectedCategory = _context.CarColors.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.ColorId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+
+            }
+            if (model.SelectedFuels != null)
+            {
+                foreach (var categoryId in model.SelectedFuels)
+                {
+                    var selectedCategory = _context.CarFuels.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.FuelId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+
+            }
+            if (model.SelectedOrigins != null)
+            {
+                foreach (var categoryId in model.SelectedOrigins)
+                {
+                    var selectedCategory = _context.CarOrigins.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.OriginId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+
+            }
+            if (model.SelectedYOPs != null)
+            {
+                foreach (var categoryId in model.SelectedYOPs)
+                {
+                    var selectedCategory = _context.CarYOPs.Find(categoryId);
+                    if (selectedCategory != null)
+                    {
+                        var filteredCars = cars.Where(b => b.YOPId == categoryId).ToList();
+
+                        //Cheking selected categories ids and filtering list
+                        foreach (var car in filteredCars)
+                        {
+                            if (!cars1.Any(c => c.id == car.id))
+                            {
+                                cars1.Add(car);
+                            }
+                        }
+                    }
+                }
+                cars = cars1;
+
+            }
+
+            return cars;
+
+        }
         public async Task AddAsync(DropdownVM data)
         {
             if (data.CoverPhoto != null)
@@ -85,10 +273,10 @@ namespace KirilsShop.Data.Services
         public async Task DeleteAsync(int id)
         {
 
-            var entity =  _context.Car.FirstOrDefault(x => x.id == id);
+            var entity = _context.Car.FirstOrDefault(x => x.id == id);
             if (entity != null)
             {
-                 _context.Remove(entity);
+                _context.Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }
@@ -101,7 +289,7 @@ namespace KirilsShop.Data.Services
 
         public async Task<Car> GetByIdAsync(int id)
         {
-            var data =  _context.Car.Include(c => c.Body)
+            var data = _context.Car.Include(c => c.Body)
                 .Include(c => c.Brand)
                 .Include(c => c.Color)
                 .Include(c => c.Fuel)
@@ -112,7 +300,7 @@ namespace KirilsShop.Data.Services
             return data;
         }
 
-        public async Task UpdateAsync(DropdownVM data,int id)
+        public async Task UpdateAsync(DropdownVM data, int id)
         {
             var entity = _context.Car.FirstOrDefault(x => x.id == id);
             if (entity != null)
@@ -130,11 +318,11 @@ namespace KirilsShop.Data.Services
                 entity.Mileage = data.Mileage;
                 entity.VIN = data.VIN;
                 entity.Price = data.Price;
-                    
+
                 await _context.SaveChangesAsync();
             }
-            
-            
+
+
 
 
         }
@@ -165,6 +353,7 @@ namespace KirilsShop.Data.Services
             IQueryable<T> query = _context.Set<T>();
             return await query.Where(predicate).ToListAsync();
         }
-      
+
+
     }
 }
