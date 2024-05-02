@@ -50,7 +50,7 @@ namespace KirilsShop.Data.Services
 
 
 
-            List<Car> cars1 = new List<Car>();
+            List<Car> blankList = new List<Car>();
 
             if (model.SelectedBrands != null)
             {
@@ -64,14 +64,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
                
             }
 
@@ -87,14 +87,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                        foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
                 
             }
 
@@ -110,14 +110,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
 
             }
             if (model.SelectedColors != null)
@@ -132,14 +132,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
 
             }
             if (model.SelectedFuels != null)
@@ -154,14 +154,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
 
             }
             if (model.SelectedOrigins != null)
@@ -176,14 +176,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
 
             }
             if (model.SelectedYOPs != null)
@@ -198,14 +198,14 @@ namespace KirilsShop.Data.Services
                         //Cheking selected categories ids and filtering list
                         foreach (var car in filteredCars)
                         {
-                            if (!cars1.Any(c => c.id == car.id))
+                            if (!blankList.Any(c => c.id == car.id))
                             {
-                                cars1.Add(car);
+                                blankList.Add(car);
                             }
                         }
                     }
                 }
-                cars = cars1;
+                cars = blankList;
 
             }
 
